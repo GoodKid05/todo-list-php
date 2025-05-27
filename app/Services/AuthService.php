@@ -59,8 +59,7 @@ class AuthService
 			'sub' => $user['id'],
 			'email' => $user['email'],
 			'iat' => time(),
-			// 'exp' => time() + 900,
-			'exp' => time() + 604800,
+			'exp' => time() + 900,
 			'jti' => bin2hex(random_bytes(8))
 		];
 		return JWT::encode($payload, $this->jwtSecret, 'HS256');
