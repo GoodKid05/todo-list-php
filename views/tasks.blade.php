@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>To-do List</title>
+	<link rel="stylesheet" href="/css/styles.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="icon" href="/images/logo.jpg" type="image/jpg">
+	<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+	<script defer src="../js/app.js"></script>
+</head>
+<body>
+	<header class="site-header">
+		<h1 class="header-title">To-do List</h1>
+		<nav class="main-nav">
+			<ul class="main-nav-list">
+				<li class="main-nav-item"> <a class="main-nav-link" href="/api/tasks">Задачи </a></li> 
+			</ul>
+		</nav>
+	</header>	
+	<div class="overlay hidden" id="overlay"></div>
+	<div class="modal-window-create-task hidden" id="modal-window-create-task">
+		<form class="create-task-form" id="create-task-form" action="/tasks/" method="POST">
+			<div class="create-task-form-row">
+				<input class="create-task-form-input" type="text" name="title" id="title" required>
+				<label class="create-task-form-label" for="title">Название</label>
+			</div>
+			<div class="create-task-form-row">
+				<textarea class="create-task-form-textarea" name="description" id="description" required></textarea>
+				<label class="create-task-form-label" for="description">Описание</label>
+			</div>
+			<div class="create-task-form-row">
+				<input class="create-task-form-input" type="date" name="deadline" id="deadline">
+				<label class="create-task-form-label" for="deadline">Срок</label>
+			</div>
+			<div class="create-task-form-row">
+				<button class="task-button" type="submit">Создать задачу</button>
+			</div>
+		</form>
+	</div>
+
+	<main>
+		<ul class="task-actions">
+			<li class="task-action"><button class="task-button" id="create-task-button"> Создать задачу </button></li>
+			<li class="task-action task-search-action" id="search-action">
+				<form class="task-search-form" id="task-search-form">
+					Найти задачу по: 
+					<select class="task-search-select">
+						<option value="id">ID</option>
+						<option value="title">Название</option>
+						<option value="description">Описание</option>
+						<option value="status">Статус</option>
+						<option value="created_at">Дата создания</option>
+						<option value="updated_at">Дата обновления</option>
+						<option value="deadline">По сроку</option>
+					</select>
+					<input type="text" class="task-search-input" placeholder="Введите значение">
+					<button class="task-button" id="search-task-button">Найти</button>
+				</form>
+			</li>
+			<li class="task-action">
+				<button class="task-button" id="delete-selected"> Удалить выбранные </button>
+				<button class="task-button"> Обновить выбранные </button>
+			</li>
+		</ul>
+		<div class="content" id="task-content"> 
+			<h2 class="content-title">Список задач</h2>
+			<div class="table-task-container">
+				<table class="table-task" id="table-task" border="1">
+					<thead>
+						<tr class="table-task-row">
+							<th class="table-task-header"></th>
+							@foreach($tableHeaders as $tableHeader)
+								<th class="table-task-header">{{ $tableHeader }}</th>
+							@endforeach
+						</tr>
+					</thead>
+					<tbody class="table-task-body" id="table-task-body">
+						@foreach($tableData as $row)
+						<tr class="table-task-row"  data-task-id="{{ $row['id'] }}">
+							<td>
+								<input type="checkbox" class="task-checkbox">
+								<span class="custom-checkbox"></span>
+							</td>
+							@foreach($row['values'] as $value)
+								<td>{{ $value ?: 'null' }}</td>
+							@endforeach	
+						</tr>
+						@endforeach	
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+	</main>
+
+	<footer>
+		<p>© 2025 It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
+	</footer>
+
+</body>
+</html>

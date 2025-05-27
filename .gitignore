@@ -1,0 +1,13 @@
+#Composer
+/vendor/
+/composer.lock
+
+# Enviroment files
+.env
+
+# Logs
+*.log
+
+#Cache
+cache/
+/app/cache
