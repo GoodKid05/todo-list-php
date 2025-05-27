@@ -29,7 +29,7 @@ API использует авторизацию через access/refresh ток
 Access токен: короткоживущий (15 минут)
 Refresh токен: долговечный (7 дней)
 
-### ✅ Эндпоинты пользователей и токенов (Users / Tokens):
+### ✅ Эндпоинты пользователей и токенов (Users / Tokens)
 POST /api/auth/register — регистрация пользователя\
 POST /api/auth/login — получение токенов\
 POST /api/auth/refresh — обновление access токена\
